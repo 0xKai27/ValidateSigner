@@ -59,7 +59,7 @@ ethereumButton.addEventListener('click', function () {
 // Get the account in the window object
 function getAccount() {
     return __awaiter(this, void 0, void 0, function () {
-        var accounts;
+        var account;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -72,9 +72,9 @@ function getAccount() {
                     exports.signer = signer = provider.getSigner();
                     return [4 /*yield*/, signer.getAddress()];
                 case 3:
-                    accounts = _a.sent();
-                    if (accounts !== activeAccount) {
-                        activeAccount = accounts;
+                    account = _a.sent();
+                    if (account !== activeAccount) {
+                        activeAccount = account;
                     }
                     showAccount.innerHTML = activeAccount;
                     return [2 /*return*/];

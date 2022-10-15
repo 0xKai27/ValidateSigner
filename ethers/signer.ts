@@ -33,9 +33,9 @@ async function getAccount() {
     }
     
     signer = provider.getSigner();
-    const accounts: string = await signer.getAddress();
-    if (accounts !== activeAccount) {
-      activeAccount = accounts;
+    const account: string = await signer.getAddress();
+    if (account !== activeAccount) {
+      activeAccount = account;
     }
     showAccount.innerHTML = activeAccount;
 };
