@@ -7,6 +7,12 @@ This repo also comes with a working Ethers.js `provider` under the `/ethers/` di
 * Listen for changes in accounts
 * Refresh the page when network is changed (see Ethers.js best practices)
 
+As Ethers.Js will be running in the browser, we will need to compile the `.ts` files in order to `browserify` it to be served on the browser:
+```
+tsc ethers/signer.ts
+browserify ethers/signer.js -o public/javascripts/bundle.js
+```
+
 To run the application, user will have to run:
 ```
 npm install
