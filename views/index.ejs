@@ -7,10 +7,28 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <h2>Get user to initiate connection to Metamask</h2>
-    <button class="enableEthereumButton">Connect to Metamask</button>
-    <h3>Account: <span class="showAccount"></span></h3>
-    <h3>Chain ID: <span class="showChainId"></span></h3>
+    <hr>
+      <h2>Get user to initiate connection to Metamask</h2>
+      <button class="enableEthereumButton">Connect to Metamask</button>
+        <h3>Account: <span class="showAccount"></span></h3>
+        <h3>Chain ID: <span class="showChainId"></span></h3>
+    <hr>
+      <h2>Sign offline message</h2>
+      <form id="signMessage">
+        <p>Message:</p>
+        <input type="text" id="message"/>
+        <br>
+        <button>Sign Message</button>
+      </form>
+    <hr>
+      <h2>Get unsigned/signed message on server</h2>
+      <button id="getServerMessages">Get Signed Message</button>
+        <h3>Unsigned Message: <span id="unsignedMessage"></span></h3>
+        <h3>Signed Message: <span id="signedMessage"></span></h3>
+    <hr>
+      <h2>Validate message signer</h2>
+      <button id="validateSignature">Validate Signature</button>
+        <h3>Message Signer: <span id="messageSigner"></span></h3>
     <script src="javascripts/bundle.js"></script>
   </body>
 </html>

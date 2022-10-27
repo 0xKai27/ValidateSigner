@@ -12,9 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.signer = exports.provider = void 0;
 const ethers_1 = require("ethers");
 // Get the provider and signer from the browser window
-const provider = new ethers_1.ethers.providers.Web3Provider(window.ethereum);
+const provider = new ethers_1.ethers.providers.Web3Provider(window.ethereum, "any");
 exports.provider = provider;
-const signer = provider.getSigner();
+let signer = provider.getSigner();
 exports.signer = signer;
 // Initialise the page objects to interact with
 const ethereumButton = document.querySelector('.enableEthereumButton');
@@ -31,21 +31,41 @@ ethereumButton.addEventListener('click', () => {
 // Get the account in the window object
 function getAccount() {
     return __awaiter(this, void 0, void 0, function* () {
-        const accounts = yield signer.getAddress();
-        if (accounts.length === 0) {
-            // MetaMask is locked or the user has not connected any accounts
-            console.log('Please connect to MetaMask.');
+        // Prompt the user to login with Metamask if wallet is locked
+        if (signer['_address'] === null) {
+            yield login();
         }
-        else if (accounts[0] !== activeAccount) {
-            activeAccount = accounts[0];
+        exports.signer = signer = provider.getSigner();
+        const account = yield signer.getAddress();
+        if (account !== activeAccount) {
+            activeAccount = account;
         }
         showAccount.innerHTML = activeAccount;
     });
 }
+;
 // Get the connected network chainId
 function getChainId() {
     return __awaiter(this, void 0, void 0, function* () {
-        activeChainId = yield (yield provider.getNetwork()).chainId.toString();
+        activeChainId = (yield provider.getNetwork()).chainId.toString();
         showChainId.innerHTML = activeChainId;
     });
 }
+;
+// Request the user to login with Metamask
+function login() {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield provider.send("eth_requestAccounts", []);
+    });
+}
+;
+// Update the connected account if user switches accounts on Metamask
+provider.provider.on("accountsChanged", () => __awaiter(void 0, void 0, void 0, function* () {
+    yield getAccount();
+}));
+// Force page refresh on network changes (see Ethers best practices)
+provider.on("network", (newNetwork, oldNetwork) => {
+    if (oldNetwork) {
+        window.location.reload();
+    }
+});
