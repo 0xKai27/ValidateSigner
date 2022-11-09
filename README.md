@@ -2,7 +2,7 @@
 
 Sample implementation of Ethereum message signing. Message can be customised via the UI and signing is via the Issuer's Metamask wallet.
 
-For the full guide on Medium, please refer:
+For the full guide on Medium, please refer: https://medium.com/@kaishinaw/signing-and-verifying-ethereum-messages-f5acd41ca1a8
 
 As Ethers.Js will be running in the browser, we will need to compile the `.ts` files in order to `browserify` it to be served on the browser:
 ```
