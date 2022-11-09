@@ -1,16 +1,13 @@
-# Express Metamask Ethers TypeScript Skeleton
+# Ethereum Signing and Validation of Messages
 
-Typescript implementation of connecting Metamask to Ethers.js on Express. This repo has been modified from `express-generator` to enable prototyping of TypeScript applications using Express. 
+Sample implementation of Ethereum message signing. Message can be customised via the UI and signing is via the Issuer's Metamask wallet.
 
-This repo also comes with a working Ethers.js `provider` under the `/ethers/` directory. Functions implemented include:
-* Trigger Metamask to prompt user to login when wallet is locked
-* Listen for changes in accounts
-* Refresh the page when network is changed (see Ethers.js best practices)
+For the full guide on Medium, please refer:
 
 As Ethers.Js will be running in the browser, we will need to compile the `.ts` files in order to `browserify` it to be served on the browser:
 ```
-tsc ethers/signer.ts
-browserify ethers/signer.js -o public/javascripts/bundle.js
+tsc
+browserify build/client/ethers/signer.js build/client/signing/sign.js  build/client/signing/validate.js -o public/javascripts/bundle.js
 ```
 
 To run the application, user will have to run:
